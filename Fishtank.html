@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html> 
+ <head>
+    <title>Processing.JS inside Webpages: Template</title> 
+</head>
+ <body>
+    <p align="center"> 
+
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(30);
+        var fishOneX = 300;
+        var fishTwoX = 54;
+        var fishThreeX = -177;
+        var fishFourX = 123;
+        var fishFiveX = 284;
+        var fishSixX = -41;
+       
+        // ProgramCodeGoesHere
+        draw = function() {
+          background(89, 216, 255);
+          
+          //Fish drawing function
+          var drawFish = function(centerX,centerY,bodyLength,bodyHeight,bodyColor,tailColor){
+            noStroke();
+            fill(bodyColor);
+            // body
+            ellipse(centerX, centerY, bodyLength, bodyHeight);
+            // tail
+            fill(tailColor,random(0,225),random(0,225));
+            var tailWidth = bodyLength/4;
+            var tailHeight = bodyHeight/2;
+            triangle(centerX-bodyLength/2, centerY,
+                 centerX-bodyLength/2-tailWidth, centerY-tailHeight,
+                 centerX-bodyLength/2-tailWidth, centerY+tailHeight);
+            // eye
+            fill(33, 33, 33);
+            ellipse(centerX+bodyLength/4, centerY, bodyHeight/5, bodyHeight/5);
+          };
+          
+          var sectionHeight=135;
+          
+          //Seaweed drawing function
+          var seaWeedSection=function(Xpos,Ypos){
+            fill(12, 97, 16);
+            ellipse(Xpos,Ypos,30/135*sectionHeight,sectionHeight);
+          };
+          
+          
+          
+          drawFish(fishOneX,100,40,60,255,79);
+          drawFish(fishTwoX,300,33,30,84,128);
+          
+          seaWeedSection(214,400);
+          seaWeedSection(214,300);
+          
+          drawFish(fishThreeX,273,139,60,191,89);
+
+      
+          drawFish(fishFourX,201,108,94,216,114);
+          drawFish(fishFiveX,334,66,33,245,-20);
+    
+    
+          seaWeedSection(390,200);
+          seaWeedSection(390,300);
+          seaWeedSection(390,400);
+          seaWeedSection(390,100);
+          
+          drawFish(fishSixX,367,52,70,84,120);
+
+          seaWeedSection(100,400);
+          seaWeedSection(100,300);
+          seaWeedSection(100,200);
+          seaWeedSection(100,100);
+          seaWeedSection(100,0);
+          
+          fishOneX += 2;
+          fishTwoX++;
+          fishThreeX ++;
+          fishFourX ++;
+          fishFiveX++;
+          fishSixX += 2;
+        };
+    }};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
+</html>
